@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  melodi_chat_server:
+    build: .
+    container_name: melodi_chat_server
+    restart: unless-stopped
+    ports:
+      - "7070:7070"
+    environment:
+      - CHAT_PORT=7070
+      - CHAT_SCALE_MODE=scalable
+      - CHAT_SECRET=melodi_chat_secret_789
+      - CHAT_REDIS_HOST=melodi_redis
+      - CHAT_REDIS_PORT=6379
+      - WEBSOCKET_BROADCAST_URL=http://melodi_websocket:3002/internal/broadcast
+      - WEBSOCKET_SECRET=melodi_ws_secret_456
+      - CHAT_DB_URL=sqlite+aiosqlite:////data/chat.db
+    volumes:
+      - chat_data:/data
+    networks:
+      - melodi_net
+
+volumes:
+  chat_data:
+
+networks:
+  melodi_net:
+    external: true

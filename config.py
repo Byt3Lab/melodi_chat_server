@@ -95,7 +95,7 @@ def load_config() -> ChatConfig:
     redis_host = args.redis_host or os.environ.get("CHAT_REDIS_HOST") or file_cfg.get("redis_host", "localhost")
     redis_port = int(args.redis_port or os.environ.get("CHAT_REDIS_PORT") or file_cfg.get("redis_port", 6379))
     redis_password = args.redis_password or os.environ.get("CHAT_REDIS_PASSWORD") or file_cfg.get("redis_password", "")
-    ws_url = args.ws_url or os.environ.get("WEBSOCKET_BROADCAST_URL") or file_cfg.get("ws_url", "http://127.0.0.1:3002/internal/broadcast")
+    ws_url = args.ws_url or os.environ.get("WEBSOCKET_BROADCAST_URL") or file_cfg.get("ws_url", "http://127.0.0.1:8070/internal/broadcast")
     ws_secret = args.ws_secret or os.environ.get("WEBSOCKET_SECRET") or file_cfg.get("ws_secret", "melodi_ws_secret_456")
 
     return ChatConfig(

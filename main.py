@@ -170,6 +170,9 @@ async def update_config():
     save_server_config(data)
     # Reload local config
     config = load_config()
+    # Keep the WebSocket publisher in sync with the reloaded config
+    ws_publisher.ws_url = config.websocket_broadcast_url.rstrip("/")
+    ws_publisher.secret = config.websocket_secret
 
     return jsonify({
         "status": "success",
